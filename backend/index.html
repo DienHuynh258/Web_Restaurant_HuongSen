@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+text-align: center;
+}
+h1{
+color: red;
+margin: 0px;
+}
+h3{
+margin: 0px 0px 20px 0px;
+}
+.form {
+margin: auto;
+padding-top: 10px;
+width: 400px;
+text-align: left;
+background-color: aliceblue;
+border-radius: 10px
+}
+.form input
+{
+width: 100%;
+padding: 0px;
+margin: 10px auto;
+height: 25px;
+border-radius: 5px;
+border: 1px solid gray;
+}
+.footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.footer button {
+padding: 10px;
+color: white;
+border: none;
+border-radius: 5px;
+}
+.footer button[type="submit"] {
+margin-right: 10px;
+background-color:dodgerblue;
+border: none;
+border-radius: 5px;
+}
+.footer button[type="reset"]{
+background-color: gray;
+}
+.footer .span{
+text-align: right;
+margin-right: 10px;
+}
+</style>
+</head>
+<body>
+<h1>Welcome to OU shop</h1>
+<h3>Sign up</h3>
+<form onsubmit="return validation()" class="form">
+<label for="name"><span>Name</span></label> <br>
+<input type="text" id="name" required>
+<label for="email"><span>Email</span></label> <br>
+<input type="email" id="email">
+<label for="username"><span>Username</span></label>
+<input type="text" id="username">
+<label for="password"><span>Password</span></label>
+<input type="password" id="password">
+<label for="confirm">Confirm password</label>
+<input type="password" id="confirm-password">
+<label for="mobile">Mobile Number</label>
+<input type="number" id="mobile-phone">
+<!-- <input type="submit"> -->
+<div class="footer">
+<div class="">
+<button type="submit" id="submit">Submit</button>
+<button type="reset">Reset</button>
+</div>
+<div class="span">
+<span style="width: auto;">Already have an account? <a 
+href="">Login</a></span>
+</div>
+</div>
+</form>
+<script>
+  const submitButton = document.getElementById("submit"); // Replace with the actual ID of your button
+submitButton.addEventListener("click", validation);
+
+    function validation() {
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var emailRegex = /^\S+@\S+\.\S+$/;
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirm-password").value;
+      var mobileNumber = document.getElementById("mobile-phone").value;
+
+      if (name === "") {
+        document.getElementById("name-error").innerHTML =
+          "Please fill the Name field";
+        return false;
+      }
+
+      if (email === "") {
+        document.getElementById("email-error").innerHTML =
+          "Please fill the email field";
+        return false;
+      }
+      if (!emailRegex.test(email)) {
+        document.getElementById("email-error").innerHTML = "Invalid Email";
+        return false;
+      }
+
+      if (username === "") {
+        document.getElementById("username-error").innerHTML =
+          "Please fill the username field";
+        return false;
+      }
+      if (username.length <= 3 || username.length > 20) {
+        document.getElementById("username-error").innerHTML =
+          "Username length must be between 3 and 20";
+        return false;
+      }
+      if (!isNaN(username)) {
+        document.getElementById("username-error").innerHTML =
+          "Only characters are allowed";
+        return false;
+      }
+
+      if (password === "") {
+        document.getElementById("password-error").innerHTML =
+          "Please fill the password field";
+        return false;
+      }
+      if (password.length <= 5 || password.length > 20) {
+        document.getElementById("password-error").innerHTML =
+          "Password length must be between 5 and 20";
+        return false;
+      }
+
+      if (password !== confirmPassword) {
+        document.getElementById("confirm-password-error").innerHTML =
+          "Password Mismatch";
+        return false;
+      }
+
+      if (confirmPassword === "") {
+        document.getElementById("confirm-password-error").innerHTML =
+          "Please fill the confirm password field";
+        return false;
+      }
+
+      if (mobileNumber === "") {
+        document.getElementById("mobile-number-error").innerHTML =
+          "Please fill the mobile number field";
+        return false;
+      }
+
+      goInformation(name, email, username, mobileNumber);
+      return true;
+    }
+
+    function goInformation(name, email, username, mobileNumber) {
+      var Mywindow = window.open("", "_blank", "width=400,height=300");
+      Mywindow.document.write(
+        "Information of the user: " +
+          name +
+          ", " +
+          email+
+          ", " +
+          username +
+          ", " +
+          mobileNumber
+      );
+    }
+  </script>
+</body>
+</html>
